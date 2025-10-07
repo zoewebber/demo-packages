@@ -16,6 +16,8 @@
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "npm install --save-dev @buddy-works/unit-tests && playwright install && playwright install-deps",
+    "test:e2e:ci": "playwright test --reporter=default --reporter=@buddy-works/unit-tests/playwright",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
