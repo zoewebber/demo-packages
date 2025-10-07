@@ -67,7 +67,7 @@ export default defineConfig({
      * Playwright will re-use the local server if there is already a dev-server running.
      */
     command: 'npm run dev',
-    port: 5174,
+    port: 5173,
     reuseExistingServer: false, // Always fresh start
     timeout: 15 * 1000, // 15 seconds for server startup
   },
