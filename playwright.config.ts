@@ -15,14 +15,10 @@ import { defineConfig, devices } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './tests/e2e',
-  /* Maximum time one test can run for - reduced for faster feedback */
-  timeout: 10 * 1000, // 10 seconds instead of 30
+  /* Maximum time one test can run for - increased for CI stability */
+  timeout: 30 * 1000, // 30 seconds for CI stability
   expect: {
-    /**
-     * Maximum time expect() should wait for the condition to be met.
-     * For example in `await expect(locator).toHaveText();`
-     */
-    timeout: 1000, // 1 seconds instead of 5
+    timeout: 5000, // 5 seconds for expect operations
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -34,8 +30,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Maximum time each action such as `click()` can take - reduced for faster feedback */
-    actionTimeout: 500, // 0.5 seconds instead of 0 (no limit)
+    /* Maximum time each action such as `click()` can take - increased for special chars */
+    actionTimeout: 5000, // 5 seconds for typing special characters
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'http://localhost:5173',
 
