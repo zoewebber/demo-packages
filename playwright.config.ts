@@ -27,9 +27,9 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: 1, // Small retry for both local and CI
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: undefined, // Let Playwright decide
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -68,7 +68,7 @@ export default defineConfig({
      */
     command: process.env.CI ? 'npm run preview' : 'npm run dev',
     port: process.env.CI ? 4173 : 5174,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false, // Always fresh start
     timeout: 15 * 1000, // 15 seconds for server startup
   },
 })
