@@ -13,7 +13,7 @@
     "postinstall": "playwright install --with-deps",
     "test:unit": "vitest --run",
     "test:unit:watch": "vitest",
-    "test:unit:ci": "vitest --run",
+    "test:unit:ci": "vitest --run --reporter=default --reporter=@buddy-works/unit-tests/vitest",
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
