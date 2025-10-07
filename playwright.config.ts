@@ -35,7 +35,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take - reduced for faster feedback */
-    actionTimeout: 5000, // 5 seconds instead of 0 (no limit)
+    actionTimeout: 500, // 0.5 seconds instead of 0 (no limit)
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.CI ? 'http://localhost:4173' : 'http://localhost:5174',
 
