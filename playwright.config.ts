@@ -27,7 +27,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: undefined, // Let Playwright decide
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html'], ['list']],
+  reporter: [['list']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take - increased for special chars */
@@ -64,7 +64,7 @@ export default defineConfig({
      */
     command: 'npm run dev',
     port: 5173,
-    reuseExistingServer: false, // Always fresh start
+    reuseExistingServer: true, // Always fresh start
     timeout: 15 * 1000, // 15 seconds for server startup
   },
 })
