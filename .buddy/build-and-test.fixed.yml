@@ -41,7 +41,7 @@
     docker_image_tag: 22
     execute_commands:
     - nohup npm run dev &
-    - npm run test:e2e:tmp:visual
+    - npm run test:e2e:ci
     - ""
     setup_commands:
     - npx playwright install --with-deps
