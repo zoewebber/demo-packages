@@ -36,6 +36,7 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
+    - npx playwright install
     - npm run test:e2e:ci
     - ""
     setup_commands:
