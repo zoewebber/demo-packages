@@ -30,7 +30,7 @@
     shell: BASH
     variables:
     - key: BUDDY_UT_TOKEN
-      value: bud_ut_us_gdbpgup4z86azdtywof4d6ucnnog6v
+      value: bud_ut_us_elnvc6fxd5y74iunt2x4pmw7j6euxk
   - action: npm run test:e2e:ci
     type: BUILD
     docker_image_name: library/node
