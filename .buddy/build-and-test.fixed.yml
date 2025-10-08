@@ -60,5 +60,5 @@
     shell: BASH
     variables:
     - key: BUDDY_VT_TOKEN
-      value: bud_vt_us_aHR0cHM6Ly92dC5zZDUuY29t_owc0xltw6y98tsjbz5fjp37jjrywb
+      value: bud_vt_us_aHR0cHM6Ly92dC5hd3NkZXYubmV0_ojexa37nhhrmo24h637xnb7snwbfy
     vt_suite: my_first_suite
