@@ -18,6 +18,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:ci": "playwright test --reporter=@buddy-works/unit-tests/playwright",
+    "test:e2e:no-visual": "DISABLE_VISUAL_TESTS=true playwright test tests/e2e/visual-tests.spec.ts",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
@@ -26,6 +27,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@buddy-works/playwright": "^0.1.0",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "@tailwindcss/typography": "^0.5.19",
