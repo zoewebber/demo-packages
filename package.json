@@ -17,7 +17,7 @@
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ci": "bdy visual exec \"playwright test --reporter=@buddy-works/unit-tests/playwright\"",
-    "test:e2e:no-reporter": "bdy visual exec \"playwright test --reporter=line\"",
+    "test:e2e:tmp:visual": "bdy visual exec \"playwright test tests/e2e/visual-tests.spec.ts --reporter=list\"",
     "test:e2e:no-visual": "DISABLE_VISUAL_TESTS=true playwright test tests/e2e/visual-tests.spec.ts",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
