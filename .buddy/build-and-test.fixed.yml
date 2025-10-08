@@ -40,7 +40,7 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
-    - npm run dev
+    - nohup npm run dev &
     - npm run test:e2e:tmp:visual
     - ""
     setup_commands:
