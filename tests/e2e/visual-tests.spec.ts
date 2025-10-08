@@ -26,33 +26,33 @@ test.describe('Visual Tests', () => {
     await page.evaluate(() => localStorage.clear());
   });
 
-  test('home-welcome-empty', async ({ page }, testInfo) => {
+  test('home-welcome-empty', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "home-welcome-empty");
       }
     }
   });
 
-  test('about-page', async ({ page }, testInfo) => {
+  test('about-page', async ({ page }: any) => {
     await page.goto('/about');
     await page.waitForLoadState('networkidle');
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "about-page");
       }
     }
   });
 
-  test('list-empty', async ({ page }, testInfo) => {
+  test('list-empty', async ({ page }: any) => {
     // Navigate to todo app (which is the main app)
     await page.goto('/');
     await page.waitForLoadState('networkidle');
@@ -62,14 +62,14 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-empty");
       }
     }
   });
 
-  test('list-todos', async ({ page }, testInfo) => {
+  test('list-todos', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
@@ -109,14 +109,14 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-todos");
       }
     }
   });
 
-  test('list-filter-pending', async ({ page }, testInfo) => {
+  test('list-filter-pending', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
@@ -163,14 +163,14 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-filter-pending");
       }
     }
   });
 
-  test('list-search-results', async ({ page }, testInfo) => {
+  test('list-search-results', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
@@ -217,14 +217,14 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-search-results");
       }
     }
   });
 
-  test('list-long-text', async ({ page }, testInfo) => {
+  test('list-long-text', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
@@ -241,14 +241,14 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-long-text");
       }
     }
   });
 
-  test('list-special-characters', async ({ page }, testInfo) => {
+  test('list-special-characters', async ({ page }: any) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
@@ -265,7 +265,7 @@ test.describe('Visual Tests', () => {
     
     // Only take screenshot if visual tests are enabled
     if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (testInfo as any).visualTestPlugin;
+      const visualTestPlugin = (page as any).visualTestPlugin;
       if (visualTestPlugin) {
         await visualTestPlugin.takeSnap(page, "list-special-characters");
       }
