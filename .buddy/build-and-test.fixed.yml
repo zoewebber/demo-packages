@@ -18,6 +18,8 @@
     execute_commands:
     - npm install
     - ""
+    setup_commands:
+    - npx playwright install
     shell: BASH
   - action: npm run test:unit:ci
     type: BUILD
