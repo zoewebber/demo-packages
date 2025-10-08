@@ -43,7 +43,7 @@
     - npx playwright install --with-deps
     - ""
     cached_dirs:
-    - /root/.cache
+    - /root/.cache/ms-playwright/
     shell: BASH
     variables:
     - key: BUDDY_UT_TOKEN
