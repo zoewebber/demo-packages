@@ -40,8 +40,8 @@
     - npm run test:e2e:ci
     - ""
     setup_commands:
-    - npx playwright install
-    - 'npx playwright install-deps '
+    - npx playwright install --with-deps
+    - "#npx playwright install-deps "
     cached_dirs:
     - /root/.cache/ms-playwright/
     shell: BASH
