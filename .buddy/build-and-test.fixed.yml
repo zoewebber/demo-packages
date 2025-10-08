@@ -47,7 +47,7 @@
     shell: BASH
     variables:
     - key: BUDDY_UT_TOKEN
-      value: bud_ut_us_iqjel0cgjnvnh3swhbw5w2q17hwg40
+      value: bud_ut_us_a9n5b02k3xx0oxeyd4co7k87guhzro
       type: VAR
   - action: test storybook
     type: BUILD
