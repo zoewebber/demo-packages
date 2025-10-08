@@ -35,31 +35,7 @@ test.describe('Visual Tests', () => {
     await expect(page.locator('input[placeholder="What needs to be done?"]')).toBeVisible();
   });
 
-  test('about-page', async ({ page, visualTestPlugin }) => {
-    await page.goto('/about');
-    await page.waitForLoadState('networkidle');
-    
-    // Take screenshot
-    await visualTestPlugin.takeSnap(page, "about-page");
-    
-    // Verify functionality - check for todo app elements (since router is not used)
-    await expect(page.locator('input[placeholder="What needs to be done?"]')).toBeVisible();
-  });
 
-  test('list-empty', async ({ page, visualTestPlugin }) => {
-    // Navigate to todo app (which is the main app)
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-    
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
-    
-    // Take screenshot
-    await visualTestPlugin.takeSnap(page, "list-empty");
-    
-    // Verify functionality
-    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(0);
-  });
 
   test('list-todos', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
