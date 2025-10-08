@@ -41,7 +41,7 @@
     docker_image_tag: 22
     execute_commands:
     - bdy version
-    - bdy
+    - bdy || true
     - bdy visual exec \"playwright test --reporter=list\"
     - ""
     setup_commands:
