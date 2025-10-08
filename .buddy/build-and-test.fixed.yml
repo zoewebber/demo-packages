@@ -1,7 +1,5 @@
 - pipeline: build-and-test
   name: build and test
-  refs:
-  - :default
   events:
   - type: WEBHOOK
   fail_on_prepare_env_warning: true
