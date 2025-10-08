@@ -41,6 +41,7 @@
     - ""
     setup_commands:
     - npx playwright install
+    - 'npx playwright install-deps '
     cached_dirs:
     - /root/.cache/ms-playwright/
     shell: BASH
