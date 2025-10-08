@@ -7,7 +7,7 @@
   fail_on_prepare_env_warning: true
   variables:
   - key: BUDDY_API_URL
-    value: https://api.sd5.com
+    value: https://api.awsdev.net
   - key: NODE_TLS_REJECT_UNAUTHORIZED
     value: 0
   actions:
