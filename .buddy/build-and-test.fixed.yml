@@ -26,7 +26,6 @@
     shell: BASH
   - action: npm run test:unit:ci
     type: BUILD
-    disabled: true
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
