@@ -37,8 +37,7 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
-    - npm run test:e2e:ci
-    - ""
+    - 'BUDDY_LOGGER_DEBUG=1 BUDDY_TRIGGERING_ACTOR_ID="" BUDDY="" BUDDY_UT_TOKEN=bud_ut_us_x6xlajbw5ygfpt2r32rk85q89hv1im BUDDY_API_URL=https://api.awsdev.net npm run test:e2e:ci '
     setup_commands:
     - npx playwright install --with-deps
     - npm i -g bdy@1.12.5-dev
