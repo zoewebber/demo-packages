@@ -47,7 +47,7 @@
     shell: BASH
     variables:
     - key: BUDDY_UT_TOKEN
-      value: bud_ut_us_eoq3atbdjojvfhx0ftxu5okux699cr
+      value: bud_ut_us_iqjel0cgjnvnh3swhbw5w2q17hwg40
   - action: test storybook
     type: BUILD
     docker_image_name: library/node
