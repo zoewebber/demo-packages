@@ -19,7 +19,7 @@
     - npm install
     - ""
     cached_dirs:
-    - /root/.cache
+    - /root/.cache/ms-playwright/
     shell: BASH
   - action: npm run test:unit:ci
     type: BUILD
