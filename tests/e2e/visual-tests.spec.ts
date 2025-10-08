@@ -1,10 +1,8 @@
 import { test as base, expect } from "@playwright/test";
-import withVisualTestPluginFixture from "@buddy-works/playwright";
+import withVisualTestPluginFixture from "@buddy-works/visual-tests-playwright";
 
-// Use regular test if visual tests are disabled, otherwise use visual test plugin
-const test = process.env.DISABLE_VISUAL_TESTS === 'true' 
-  ? base 
-  : withVisualTestPluginFixture(base);
+// Add fixture with plugin
+const test = withVisualTestPluginFixture(base);
 
 // Static test data for consistent screenshots
 const testTodos = [
@@ -26,33 +24,29 @@ test.describe('Visual Tests', () => {
     await page.evaluate(() => localStorage.clear());
   });
 
-  test('home-welcome-empty', async ({ page }: any) => {
+  test('home-welcome-empty', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "home-welcome-empty");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "home-welcome-empty");
+    
+    // Verify functionality
+    await expect(page.locator('h1')).toBeVisible();
   });
 
-  test('about-page', async ({ page }: any) => {
+  test('about-page', async ({ page, visualTestPlugin }) => {
     await page.goto('/about');
     await page.waitForLoadState('networkidle');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "about-page");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "about-page");
+    
+    // Verify functionality
+    await expect(page.locator('h1')).toContainText('This is an about page');
   });
 
-  test('list-empty', async ({ page }: any) => {
+  test('list-empty', async ({ page, visualTestPlugin }) => {
     // Navigate to todo app (which is the main app)
     await page.goto('/');
     await page.waitForLoadState('networkidle');
@@ -60,99 +54,57 @@ test.describe('Visual Tests', () => {
     // Wait for the todo app to be visible
     await page.waitForSelector('input[placeholder="What needs to be done?"]');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-empty");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-empty");
+    
+    // Verify functionality
+    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(0);
   });
 
-  test('list-todos', async ({ page }: any) => {
+  test('list-todos', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
-    
-    // Add test todos
+    // Add multiple todos
     const input = page.locator('input[placeholder="What needs to be done?"]');
-    
     for (const todo of testTodos) {
       await input.fill(todo.text);
       await input.press('Enter');
-      
-      // If todo should be completed, click the checkbox
+      if (todo.priority !== 'medium') {
+        const todoItem = page.locator('[data-testid="todo-item"]').filter({ hasText: todo.text });
+        await todoItem.locator('.priority-dropdown button').click();
+        await todoItem.locator(`.priority-dropdown .absolute button:has-text("${todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}")`).click();
+      }
       if (todo.completed) {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
+        const todoItem = page.locator('[data-testid="todo-item"]').filter({ hasText: todo.text });
         await todoItem.locator('input[type="checkbox"]').click();
-      }
-      
-      // If todo has high priority, change it
-      if (todo.priority === 'high') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("High")').click();
-      }
-      
-      // If todo has low priority, change it
-      if (todo.priority === 'low') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("Low")').click();
       }
     }
     
     // Wait for all todos to be added
     await page.waitForSelector('[data-testid="todo-item"]');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-todos");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-todos");
+    
+    // Verify functionality
+    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(testTodos.length);
   });
 
-  test('list-filter-pending', async ({ page }: any) => {
+  test('list-filter-pending', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
-    
-    // Add test todos
+    // Add multiple todos
     const input = page.locator('input[placeholder="What needs to be done?"]');
-    
     for (const todo of testTodos) {
       await input.fill(todo.text);
       await input.press('Enter');
-      
-      // If todo should be completed, click the checkbox
       if (todo.completed) {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
+        const todoItem = page.locator('[data-testid="todo-item"]').filter({ hasText: todo.text });
         await todoItem.locator('input[type="checkbox"]').click();
       }
-      
-      // If todo has high priority, change it
-      if (todo.priority === 'high') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("High")').click();
-      }
-      
-      // If todo has low priority, change it
-      if (todo.priority === 'low') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("Low")').click();
-      }
     }
-    
-    // Wait for all todos to be added
-    await page.waitForSelector('[data-testid="todo-item"]');
     
     // Filter to show only pending todos
     const statusFilter = page.locator('select').nth(1); // Second select is status filter
@@ -161,52 +113,24 @@ test.describe('Visual Tests', () => {
     // Wait for filter to apply
     await page.waitForTimeout(100);
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-filter-pending");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-filter-pending");
+    
+    // Verify functionality
+    const pendingTodos = testTodos.filter(todo => !todo.completed);
+    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(pendingTodos.length);
   });
 
-  test('list-search-results', async ({ page }: any) => {
+  test('list-search-results', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
-    
-    // Add test todos
+    // Add multiple todos
     const input = page.locator('input[placeholder="What needs to be done?"]');
-    
     for (const todo of testTodos) {
       await input.fill(todo.text);
       await input.press('Enter');
-      
-      // If todo should be completed, click the checkbox
-      if (todo.completed) {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('input[type="checkbox"]').click();
-      }
-      
-      // If todo has high priority, change it
-      if (todo.priority === 'high') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("High")').click();
-      }
-      
-      // If todo has low priority, change it
-      if (todo.priority === 'low') {
-        const todoItem = page.locator('[data-testid="todo-item"]').last();
-        await todoItem.locator('.priority-dropdown button').click();
-        await todoItem.locator('.priority-dropdown .absolute button:has-text("Low")').click();
-      }
     }
-    
-    // Wait for all todos to be added
-    await page.waitForSelector('[data-testid="todo-item"]');
     
     // Search for "groceries"
     const searchInput = page.locator('input[placeholder="Search todos..."]');
@@ -215,21 +139,17 @@ test.describe('Visual Tests', () => {
     // Wait for search to apply
     await page.waitForTimeout(100);
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-search-results");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-search-results");
+    
+    // Verify functionality
+    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(1);
+    await expect(page.locator('[data-testid="todo-item"]')).toContainText('groceries');
   });
 
-  test('list-long-text', async ({ page }: any) => {
+  test('list-long-text', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
-    
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
     
     // Add long text todo
     const input = page.locator('input[placeholder="What needs to be done?"]');
@@ -239,21 +159,16 @@ test.describe('Visual Tests', () => {
     // Wait for todo to be added
     await page.waitForSelector('[data-testid="todo-item"]');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-long-text");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-long-text");
+    
+    // Verify functionality
+    await expect(page.locator('[data-testid="todo-item"]')).toContainText(longTextTodo);
   });
 
-  test('list-special-characters', async ({ page }: any) => {
+  test('list-special-characters', async ({ page, visualTestPlugin }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
-    
-    // Wait for the todo app to be visible
-    await page.waitForSelector('input[placeholder="What needs to be done?"]');
     
     // Add special characters todo
     const input = page.locator('input[placeholder="What needs to be done?"]');
@@ -263,12 +178,10 @@ test.describe('Visual Tests', () => {
     // Wait for todo to be added
     await page.waitForSelector('[data-testid="todo-item"]');
     
-    // Only take screenshot if visual tests are enabled
-    if (process.env.DISABLE_VISUAL_TESTS !== 'true') {
-      const visualTestPlugin = (page as any).visualTestPlugin;
-      if (visualTestPlugin) {
-        await visualTestPlugin.takeSnap(page, "list-special-characters");
-      }
-    }
+    // Take screenshot
+    await visualTestPlugin.takeSnap(page, "list-special-characters");
+    
+    // Verify functionality
+    await expect(page.locator('[data-testid="todo-item"]')).toContainText(specialCharsTodo);
   });
 });
