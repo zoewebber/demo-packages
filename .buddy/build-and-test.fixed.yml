@@ -16,10 +16,10 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
-    - npm install --ignore-scripts
+    - "npm install #--ignore-scripts"
     - ""
     setup_commands:
-    - npx playwright install
+    - npx playwright install --with-deps
     shell: BASH
   - action: npm run test:unit:ci
     type: BUILD
