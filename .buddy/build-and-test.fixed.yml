@@ -61,6 +61,6 @@
     shell: BASH
     variables:
     - key: BUDDY_VT_TOKEN
-      value: bud_vt_us_aHR0cHM6Ly92dC5hd3NkZXYubmV0_ojexa37nhhrmo24h637xnb7snwbfy
+      value: bud_vt_us_oa06n0or26zj6nfhz976r44uzwdpra
       type: VAR
     vt_suite: storybook
