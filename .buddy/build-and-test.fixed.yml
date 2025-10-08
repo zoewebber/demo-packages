@@ -42,7 +42,7 @@
     execute_commands:
     - bdy version
     - bdy || true
-    - bdy visual exec \"playwright test --reporter=list\"
+    - bdy visual exec "playwright test --reporter=list"
     - ""
     setup_commands:
     - npx playwright install --with-deps
