@@ -61,4 +61,4 @@
     variables:
     - key: BUDDY_VT_TOKEN
       value: bud_vt_us_aHR0cHM6Ly92dC5hd3NkZXYubmV0_ojexa37nhhrmo24h637xnb7snwbfy
-    vt_suite: my_first_suite
+    vt_suite: storybook
