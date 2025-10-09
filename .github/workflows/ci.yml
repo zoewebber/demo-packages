@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: 
+    - dev
+    - stage
+    - main
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+#      - name: Login to Buddy
+#        uses: buddy/login@v1
+#        with:
+#          provider_id: 'ec308a59-554f-4306-8a55-cfe7193f7d41'
+#          region: US
+
+      - name: Login to Buddy
+        uses: buddy/login@v1
+        with:
+          token: ${{ secrets.API_KEY }}
+          region: US
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Build app
+        run: npm run build
+
+      - name: Run unit tests
+        run: npm run test:unit:ci
+
+      - name: Zip directory contents
+        run: |
+          cd dist
+          zip -r ../archive.zip .
+
+      - name: Upload artifact to Buddy [FILES]
+        run: curl -u "rafal.sztwiorok@gmail.com:$BUDDY_TOKEN" -F file=@dist/index.html https://test-myplayground.files-pkg-1.registry.sh/index.html
