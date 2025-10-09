@@ -1,4 +1,4 @@
-# Vue 3 TODO List Application
+## Vue 3 TODO List Application
 
 A modern, feature-rich TODO list application built with Vue 3, TypeScript, and Tailwind CSS. This application demonstrates best practices in Vue 3 development with comprehensive testing, component documentation, and a clean architecture.
 
