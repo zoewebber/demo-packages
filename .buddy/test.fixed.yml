@@ -14,6 +14,7 @@
     shell: BASH
   - action: pwd 2
     type: BUILD
+    disabled: true
     docker_image_name: buddy/localshell
     docker_image_tag: ubuntu_24.04
     execute_commands:
