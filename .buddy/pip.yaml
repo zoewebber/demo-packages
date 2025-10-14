@@ -1,5 +1,5 @@
 - pipeline: build-and-test
-  name: build and test
+  name: build and run test
   refs:
   - '*'
   events:
