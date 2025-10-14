@@ -1,5 +1,9 @@
-import type { Preview } from '@storybook/vue3';
-import '../src/assets/main.css';
+import type { Preview } from '@storybook/vue3'
+import '../src/assets/main.css'
+
+// Global state for managing system theme listener
+let systemThemeListener: ((e: MediaQueryListEvent) => void) | null = null
+let mediaQuery: MediaQueryList | null = null
 
 const preview: Preview = {
   parameters: {
@@ -24,6 +28,82 @@ const preview: Preview = {
       ],
     },
   },
-};
+  globalTypes: {
+    darkMode: {
+      description: 'Global theme for components',
+      defaultValue: 'system',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', icon: 'circlehollow', title: 'Light' },
+          { value: 'dark', icon: 'circle', title: 'Dark' },
+          { value: 'system', icon: 'browser', title: 'System' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  decorators: [
+    (story, context) => {
+      const themeMode = context.globals.darkMode
+      let isDark = false
 
-export default preview;
+      // Determine if dark mode should be active
+      if (themeMode === 'dark') {
+        isDark = true
+      } else if (themeMode === 'system') {
+        // Use system preference
+        isDark =
+          typeof window !== 'undefined' && window.matchMedia
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches
+            : false
+      }
+      // themeMode === 'light' defaults to isDark = false
+
+      // Apply dark class to the document element
+      if (typeof document !== 'undefined') {
+        if (isDark) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      }
+
+      // Manage system preference listener
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        // Clean up existing listener
+        if (systemThemeListener && mediaQuery) {
+          mediaQuery.removeEventListener('change', systemThemeListener)
+          systemThemeListener = null
+        }
+
+        // Set up new listener only for system mode
+        if (themeMode === 'system') {
+          mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+          systemThemeListener = (e: MediaQueryListEvent) => {
+            // Double-check we're still in system mode
+            if (context.globals.darkMode === 'system') {
+              if (typeof document !== 'undefined') {
+                if (e.matches) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              }
+            }
+          }
+
+          mediaQuery.addEventListener('change', systemThemeListener)
+        }
+      }
+
+      return {
+        template: `<div class="min-h-screen bg-background text-foreground p-4"><story /></div>`,
+      }
+    },
+  ],
+}
+
+export default preview

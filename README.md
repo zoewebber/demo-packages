@@ -5,6 +5,7 @@ A modern, feature-rich TODO list application built with Vue 3, TypeScript, and T
 ## 🚀 Features
 
 ### Core Functionality
+
 - ✅ Create, read, update, and delete todos
 - ✅ Mark todos as complete/incomplete
 - ✅ Priority levels (High, Medium, Low) with visual indicators
@@ -14,6 +15,7 @@ A modern, feature-rich TODO list application built with Vue 3, TypeScript, and T
 - ✅ Responsive design for all devices
 
 ### Technical Features
+
 - 🎨 Custom theme with CSS variables
 - 🧪 Comprehensive test coverage (80%+ target)
 - 📚 Storybook documentation for all components
@@ -35,17 +37,20 @@ A modern, feature-rich TODO list application built with Vue 3, TypeScript, and T
 ## 📦 Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd todolist-1
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -56,29 +61,37 @@ A modern, feature-rich TODO list application built with Vue 3, TypeScript, and T
 ## 🧪 Testing
 
 ### Unit Tests (Vitest)
+
 Run unit tests with coverage:
+
 ```bash
 npm run test:unit
 ```
 
 Run tests in watch mode:
+
 ```bash
 npm run test:unit:watch
 ```
 
 ### E2E Tests (Playwright)
+
 Run E2E tests:
+
 ```bash
 npm run test:e2e
 ```
 
 Run E2E tests in UI mode:
+
 ```bash
 npm run test:e2e:ui
 ```
 
 ### Test Coverage
+
 View coverage report:
+
 ```bash
 npm run test:coverage
 ```
@@ -86,11 +99,13 @@ npm run test:coverage
 ## 📚 Storybook
 
 Start Storybook for component documentation:
+
 ```bash
 npm run storybook
 ```
 
 This will open Storybook at `http://localhost:6006` where you can:
+
 - View all component stories
 - Test component variations
 - View component documentation
@@ -123,7 +138,30 @@ The application uses CSS variables for theming, defined in `src/assets/main.css`
 - **Animations**: Smooth transitions and hover effects
 
 ### Dark Mode Support
-The theme includes dark mode variants. Toggle dark mode by adding the `dark` class to the root element.
+
+The application includes a comprehensive three-mode theme system using Tailwind CSS:
+
+#### 🌟 **Three Theme Modes**
+
+- **☀️ Light Mode**: Forces light theme regardless of system preference
+- **🌙 Dark Mode**: Forces dark theme regardless of system preference
+- **💻 System Mode**: Automatically follows your OS dark mode preference
+
+#### 🎛️ **Smart Toggle Component**
+
+- **Click to cycle**: Light → Dark → System → Light...
+- **Visual indicators**: Sun, Moon, and Computer icons show current mode
+- **Real-time updates**: System mode responds instantly to OS theme changes
+- **Persistent storage**: Remembers your preference across sessions
+
+#### 🔧 **Technical Features**
+
+- **Tailwind Integration**: Uses `dark:` prefix classes and CSS variables
+- **SSR Safe**: Proper environment checks for server-side rendering
+- **Memory Efficient**: Clean event listener management
+- **Storybook Integration**: Test all three modes in component stories
+
+The theme system provides the perfect balance of user control and automatic adaptation to system preferences.
 
 ## 📊 Data Structure
 
@@ -131,36 +169,37 @@ Todos are stored in localStorage with the following structure:
 
 ```typescript
 interface Todo {
-  id: string;                    // Unique identifier
-  text: string;                 // Todo content
-  completed: boolean;            // Completion status
-  priority: 'high' | 'medium' | 'low';  // Priority level
-  order: number;                 // Sort order
-  createdAt: string;            // ISO timestamp
-  updatedAt: string;            // ISO timestamp
+  id: string // Unique identifier
+  text: string // Todo content
+  completed: boolean // Completion status
+  priority: 'high' | 'medium' | 'low' // Priority level
+  order: number // Sort order
+  createdAt: string // ISO timestamp
+  updatedAt: string // ISO timestamp
 }
 ```
 
 ## 🔧 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run test:unit` | Run unit tests |
-| `npm run test:unit:watch` | Run unit tests in watch mode |
-| `npm run test:coverage` | Run tests with coverage report |
-| `npm run test:e2e` | Run E2E tests |
-| `npm run test:e2e:ui` | Run E2E tests in UI mode |
-| `npm run storybook` | Start Storybook |
+| Script                    | Description                    |
+| ------------------------- | ------------------------------ |
+| `npm run dev`             | Start development server       |
+| `npm run build`           | Build for production           |
+| `npm run preview`         | Preview production build       |
+| `npm run test:unit`       | Run unit tests                 |
+| `npm run test:unit:watch` | Run unit tests in watch mode   |
+| `npm run test:coverage`   | Run tests with coverage report |
+| `npm run test:e2e`        | Run E2E tests                  |
+| `npm run test:e2e:ui`     | Run E2E tests in UI mode       |
+| `npm run storybook`       | Start Storybook                |
 | `npm run build-storybook` | Build Storybook for production |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
+| `npm run lint`            | Run ESLint                     |
+| `npm run format`          | Format code with Prettier      |
 
 ## 🧩 Components
 
 ### UI Components
+
 - **Button**: Various variants (default, destructive, outline, secondary, ghost, link)
 - **Input**: Text input with validation states
 - **Card**: Container component with header and content
@@ -168,6 +207,7 @@ interface Todo {
 - **Select**: Dropdown selection component
 
 ### Todo Components
+
 - **TodoApp**: Main application component
 - **TodoItem**: Individual todo item with actions
 - **TodoList**: List container with drag & drop
@@ -178,7 +218,9 @@ interface Todo {
 ## 🎯 Key Features Implementation
 
 ### State Management
+
 Uses Vue 3 Composition API with the `useTodos` composable for:
+
 - Reactive todo state
 - CRUD operations
 - Filtering and sorting
@@ -186,16 +228,19 @@ Uses Vue 3 Composition API with the `useTodos` composable for:
 - localStorage persistence
 
 ### Error Handling
+
 - Graceful localStorage error handling
 - Data validation and sanitization
 - User-friendly error messages
 
 ### Performance
+
 - Efficient reactivity with computed properties
 - Optimized re-renders
 - Lazy loading for large lists (planned)
 
 ### Accessibility
+
 - ARIA labels and roles
 - Keyboard navigation support
 - Screen reader compatibility
@@ -204,6 +249,7 @@ Uses Vue 3 Composition API with the `useTodos` composable for:
 ## 🚀 Deployment
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
@@ -211,12 +257,14 @@ npm run build
 The built files will be in the `dist/` directory, ready for deployment to any static hosting service.
 
 ### Deploy to Vercel
+
 ```bash
 npm install -g vercel
 vercel
 ```
 
 ### Deploy to Netlify
+
 ```bash
 npm install -g netlify-cli
 netlify deploy --prod --dir=dist
