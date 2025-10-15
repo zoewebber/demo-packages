@@ -45,7 +45,6 @@
     setup_commands:
     - npx playwright install --with-deps
     - npm i -g bdy@1.12.8
-    - "#npx playwright install-deps "
     shell: BASH
     variables:
     - key: BUDDY_UT_TOKEN
