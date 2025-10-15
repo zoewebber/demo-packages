@@ -44,7 +44,7 @@
     - ""
     setup_commands:
     - npx playwright install --with-deps
-    - npm i -g bdy@1.11.0
+    - npm i -g bdy@1.12.8
     - "#npx playwright install-deps "
     shell: BASH
     variables:
@@ -62,7 +62,7 @@
     - npm run build-storybook
     - cd storybook-static && bdy visual storybook
     setup_commands:
-    - npm i -g bdy@1.12.5-dev
+    - npm i -g bdy@1.12.8
     shell: BASH
     variables:
     - key: BUDDY_VT_TOKEN
