@@ -49,3 +49,10 @@
     - npm i -g bdy@1.12.8
     shell: BASH
     vt_suite: storybook
+  - action: Publish storybook package
+    type: PUBLISH_PACKAGE_VERSION
+    input_type: BUILD_ARTIFACTS
+    local_path: /storybook-static
+    package: storybook
+    versions:
+    - $BUDDY_RUN_REF
