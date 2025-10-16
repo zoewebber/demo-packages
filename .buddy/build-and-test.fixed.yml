@@ -56,4 +56,4 @@
     local_path: /storybook-static
     package: storybook
     versions:
-    - $BUDDY_RUN_REF
+    - $BUDDY_RUN_REF_NAME
