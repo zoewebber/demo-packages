@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn';
 describe('cn utility', () => {
   it('should merge class names correctly', () => {
     const result = cn('px-2 py-1', 'bg-red-500', 'text-white');
-    expect(result).toBe('px-2 py-1 bg-red-500 text-white');
+    expect(result).toBe('wrong-class-names'); // BROKEN: expecting wrong result
   });
 
   it('should handle conditional classes', () => {

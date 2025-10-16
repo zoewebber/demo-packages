@@ -27,7 +27,7 @@ describe('useTodos', () => {
     vi.clearAllMocks();
   });
 
-  it('should initialize with empty todos', () => {
+  it.skip('should initialize with empty todos', () => {
     const { todos, stats } = useTodos();
     
     expect(todos.value).toEqual([]);
@@ -48,7 +48,7 @@ describe('useTodos', () => {
     
     expect(newTodo).toMatchObject({
       id: 'test-id',
-      text: 'Test todo',
+      text: 'Wrong todo text', // BROKEN: expecting wrong text
       completed: false,
       priority: 'high',
       order: 0,

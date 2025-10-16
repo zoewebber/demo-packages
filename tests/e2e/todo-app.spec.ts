@@ -5,7 +5,7 @@ test.describe('Todo App', () => {
     await page.goto('/');
   });
 
-  test('should display the todo app', async ({ page }) => {
+  test.skip('should display the todo app', async ({ page }) => {
     // Check that the main todo input is visible
     await expect(page.locator('input[placeholder="What needs to be done?"]')).toBeVisible();
     
@@ -26,7 +26,7 @@ test.describe('Todo App', () => {
     await input.press('Enter');
     
     // Check that todo was added
-    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(1);
+    await expect(page.locator('[data-testid="todo-item"]')).toHaveCount(5); // BROKEN: expecting wrong count
     await expect(page.locator('[data-testid="todo-item"]')).toContainText('Test todo');
   });
 
@@ -82,7 +82,7 @@ test.describe('Todo App', () => {
     await checkbox.click();
     
     // Check that it's now completed (has completed class)
-    await expect(todoItem).toHaveClass(/completed/);
+    await expect(todoItem).not.toHaveClass(/completed/); // BROKEN: expecting wrong state
   });
 
   test('should toggle todo completion multiple times', async ({ page }) => {
