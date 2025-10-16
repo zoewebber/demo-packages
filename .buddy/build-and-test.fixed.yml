@@ -6,6 +6,7 @@
   - type: WEBHOOK
   - type: PUSH
   fail_on_prepare_env_warning: true
+  concurrent_pipeline_runs: true
   actions:
   - action: npm install
     type: BUILD
@@ -27,6 +28,7 @@
     setup_commands:
     - npx playwright install --with-deps
     shell: BASH
+    run_next: IN_SOFT_PARALLEL
   - action: npm run test:unit:ci
     type: BUILD
     docker_image_name: library/node
@@ -34,7 +36,6 @@
     execute_commands:
     - npm run test:unit:ci
     shell: BASH
-    run_next: IN_SOFT_PARALLEL
     unit_tests_suite: unit
   - action: npm run test:e2e:ci
     type: BUILD
