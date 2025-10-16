@@ -22,7 +22,7 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
-    - npm install --ignore-scripts
+    - npm run build
     - ""
     setup_commands:
     - npx playwright install --with-deps
