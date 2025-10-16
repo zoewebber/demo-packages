@@ -64,6 +64,7 @@
     type: PUBLISH_PACKAGE_VERSION
     input_type: BUILD_ARTIFACTS
     local_path: /storybook-static
+    run_next: IN_SOFT_PARALLEL
     package: storybook
     versions:
     - $BUDDY_RUN_REF_NAME
