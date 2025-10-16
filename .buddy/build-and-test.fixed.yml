@@ -35,7 +35,6 @@
     execute_commands:
     - npm run test:unit:ci
     shell: BASH
-    run_next: IN_SOFT_PARALLEL
     unit_tests_suite: unit
   - action: npm run test:e2e:ci
     type: BUILD
