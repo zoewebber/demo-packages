@@ -1,0 +1,50 @@
+- pipeline: build-and-test
+  name: build and test
+  refs:
+  - '*'
+  events:
+  - type: WEBHOOK
+  fail_on_prepare_env_warning: true
+  actions:
+  - action: npm install
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - npm install --ignore-scripts
+    - ""
+    setup_commands:
+    - npx playwright install --with-deps
+    shell: BASH
+  - action: npm run test:unit:ci
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - npm run test:unit:ci
+    shell: BASH
+    unit_tests_suite: unit
+  - action: npm run test:e2e:ci
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - nohup npm run dev &
+    - npm run test:e2e:ci
+    - ""
+    setup_commands:
+    - npx playwright install --with-deps
+    - npm i -g bdy@1.12.8
+    shell: BASH
+    unit_tests_suite: e2e
+  - action: test storybook
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - npm run build-storybook
+    - cd storybook-static && bdy visual storybook
+    setup_commands:
+    - npm i -g bdy@1.12.8
+    shell: BASH
+    vt_suite: storybook
