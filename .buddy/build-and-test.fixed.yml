@@ -17,6 +17,16 @@
     setup_commands:
     - npx playwright install --with-deps
     shell: BASH
+  - action: npm install 2
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - npm install --ignore-scripts
+    - ""
+    setup_commands:
+    - npx playwright install --with-deps
+    shell: BASH
   - action: npm run test:unit:ci
     type: BUILD
     docker_image_name: library/node
