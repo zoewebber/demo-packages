@@ -48,7 +48,7 @@ describe('useTodos', () => {
     
     expect(newTodo).toMatchObject({
       id: 'test-id',
-      text: 'Wrong todo text', // BROKEN: expecting wrong text
+      text: 'Test todo',
       completed: false,
       priority: 'high',
       order: 0,
