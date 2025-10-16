@@ -15,6 +15,9 @@ import { cn } from '@/utils/cn';
 
 interface Props {
   modelValue?: string;
+  type?: string;
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 interface Emits {

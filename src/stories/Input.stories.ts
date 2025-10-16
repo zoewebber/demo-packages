@@ -33,7 +33,7 @@ export const Default: Story = {
 
 export const WithValue: Story = {
   args: {
-    value: 'Hello World',
+    modelValue: 'Hello World',
     placeholder: 'Enter text...',
   },
 };

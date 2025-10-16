@@ -12,7 +12,7 @@
 
     <!-- Priority Filter -->
     <div class="flex gap-2">
-      <Select :model-value="filters.priority" @update:model-value="updatePriority">
+      <Select :model-value="filters.priority" @update:model-value="(value) => updatePriority(value as 'all' | 'high' | 'medium' | 'low')">
         <option value="all">All Priorities</option>
         <option value="high">High Priority</option>
         <option value="medium">Medium Priority</option>
@@ -22,7 +22,7 @@
 
     <!-- Status Filter -->
     <div class="flex gap-2">
-      <Select :model-value="filters.completed" @update:model-value="updateCompleted">
+      <Select :model-value="filters.completed" @update:model-value="(value) => updateCompleted(value as 'all' | 'completed' | 'incomplete')">
         <option value="all">All Status</option>
         <option value="incomplete">Pending</option>
         <option value="completed">Completed</option>

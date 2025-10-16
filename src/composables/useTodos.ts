@@ -82,15 +82,23 @@ export function useTodos() {
     }
 
     const todo = todos.value[index];
-    const updatedTodo: Todo = {
-      ...todo,
-      ...data,
-      id: todo.id, // Ensure id is preserved
-      updatedAt: getCurrentTimestamp(),
-    };
+    if (!todo) {
+      return null;
+    }
 
-    todos.value[index] = updatedTodo;
-    return updatedTodo;
+    // Only update defined properties
+    if (data.text !== undefined) {
+      todo.text = data.text;
+    }
+    if (data.completed !== undefined) {
+      todo.completed = data.completed;
+    }
+    if (data.priority !== undefined) {
+      todo.priority = data.priority;
+    }
+    todo.updatedAt = getCurrentTimestamp();
+
+    return todo;
   }
 
   function deleteTodo(id: string): boolean {

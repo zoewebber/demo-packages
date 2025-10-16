@@ -32,6 +32,7 @@ interface Props {
   checked?: boolean;
   label?: string;
   labelClass?: string;
+  disabled?: boolean;
 }
 
 defineProps<Props>();

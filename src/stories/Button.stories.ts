@@ -25,62 +25,116 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Button',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Button</Button>',
+  }),
 };
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Secondary',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Secondary</Button>',
+  }),
 };
 
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
-    children: 'Destructive',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Destructive</Button>',
+  }),
 };
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
-    children: 'Outline',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Outline</Button>',
+  }),
 };
 
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
-    children: 'Ghost',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Ghost</Button>',
+  }),
 };
 
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Link',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Link</Button>',
+  }),
 };
 
 export const Small: Story = {
   args: {
     size: 'sm',
-    children: 'Small',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Small</Button>',
+  }),
 };
 
 export const Large: Story = {
   args: {
     size: 'lg',
-    children: 'Large',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">Large</Button>',
+  }),
 };
 
 export const Icon: Story = {
   args: {
     size: 'icon',
-    children: '🚀',
   },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args };
+    },
+    template: '<Button v-bind="args">🚀</Button>',
+  }),
 };
