@@ -17,7 +17,7 @@
     setup_commands:
     - npx playwright install --with-deps
     shell: BASH
-  - action: npm install 2
+  - action: npm run build
     type: BUILD
     docker_image_name: library/node
     docker_image_tag: 22
