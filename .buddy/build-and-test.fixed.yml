@@ -6,6 +6,7 @@
   - type: WEBHOOK
   - type: PUSH
   fail_on_prepare_env_warning: true
+  concurrent_pipeline_runs: true
   actions:
   - action: npm install
     type: BUILD
