@@ -8,10 +8,8 @@
   variables:
   - key: BUDDY_API_URL
     value: https://api.buddy.works
-    type: VAR
   - key: NODE_TLS_REJECT_UNAUTHORIZED
     value: 0
-    type: VAR
   actions:
   - action: npm install
     type: BUILD
@@ -33,7 +31,7 @@
     variables:
     - key: BUDDY_UT_TOKEN
       value: bud_ut_us_x02fiqoqzpou2ihdfq9cilyubv6aom
-      type: VAR
+    unit_tests_suite: unit
   - action: npm run test:e2e:ci
     type: BUILD
     docker_image_name: library/node
@@ -49,10 +47,9 @@
     variables:
     - key: BUDDY_UT_TOKEN
       value: bud_ut_us_a9n5b02k3xx0oxeyd4co7k87guhzro
-      type: VAR
     - key: BUDDY_VT_TOKEN
       value: bud_vt_us_zbn2shker1m8247a4v8tcn65v32g28
-      type: VAR
+    unit_tests_suite: e2e
   - action: test storybook
     type: BUILD
     docker_image_name: library/node
@@ -66,5 +63,4 @@
     variables:
     - key: BUDDY_VT_TOKEN
       value: bud_vt_us_oa06n0or26zj6nfhz976r44uzwdpra
-      type: VAR
     vt_suite: storybook
