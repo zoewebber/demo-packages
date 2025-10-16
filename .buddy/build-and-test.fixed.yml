@@ -67,3 +67,10 @@
     package: storybook
     versions:
     - $BUDDY_RUN_REF_NAME
+  - action: Publish app package
+    type: PUBLISH_PACKAGE_VERSION
+    input_type: BUILD_ARTIFACTS
+    local_path: /dist
+    package: app
+    versions:
+    - $BUDDY_RUN_REF_NAME
