@@ -6,7 +6,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen app-background">
     <div class="container mx-auto px-4 py-8 max-w-6xl">
       <!-- Rainbow Header with Navigation -->
       <header class="mb-8">
@@ -62,6 +62,26 @@ const route = useRoute()
 </template>
 
 <style scoped>
+.app-background {
+  background: linear-gradient(135deg, 
+    hsl(300 100% 98%) 0%, 
+    hsl(280 100% 97%) 25%,
+    hsl(190 100% 97%) 50%,
+    hsl(330 100% 97%) 75%,
+    hsl(300 100% 98%) 100%);
+  background-attachment: fixed;
+}
+
+.dark .app-background {
+  background: linear-gradient(135deg, 
+    hsl(280 50% 12%) 0%, 
+    hsl(260 50% 15%) 25%,
+    hsl(240 45% 18%) 50%,
+    hsl(280 45% 16%) 75%,
+    hsl(280 50% 12%) 100%);
+  background-attachment: fixed;
+}
+
 header {
   position: relative;
   overflow: hidden;
