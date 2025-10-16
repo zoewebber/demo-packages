@@ -36,6 +36,7 @@
     - npx playwright install --with-deps
     - npm i -g bdy@1.12.8
     shell: BASH
+    vt_suite: application
     unit_tests_suite: e2e
   - action: test storybook
     type: BUILD
