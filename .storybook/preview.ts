@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/vue3'
 import '../src/assets/main.css'
 
 // Global state for managing system theme listener
-let systemThemeListener: ((e: MediaQueryListEvent) => void) | null = null
+let systemThemeListener: (() => void) | null = null
 let mediaQuery: MediaQueryList | null = null
 
 const preview: Preview = {
@@ -47,26 +47,19 @@ const preview: Preview = {
   decorators: [
     (story, context) => {
       const themeMode = context.globals.darkMode
-      let isDark = false
 
-      // Determine if dark mode should be active
-      if (themeMode === 'dark') {
-        isDark = true
-      } else if (themeMode === 'system') {
-        // Use system preference
-        isDark =
-          typeof window !== 'undefined' && window.matchMedia
-            ? window.matchMedia('(prefers-color-scheme: dark)').matches
-            : false
-      }
-      // themeMode === 'light' defaults to isDark = false
-
-      // Apply dark class to the document element
+      // Apply theme class to the document element
       if (typeof document !== 'undefined') {
-        if (isDark) {
+        if (themeMode === 'system') {
+          // Remove both classes to let CSS prefers-color-scheme handle it
+          document.documentElement.classList.remove('dark', 'light')
+        } else if (themeMode === 'dark') {
+          document.documentElement.classList.remove('light')
           document.documentElement.classList.add('dark')
         } else {
+          // themeMode === 'light'
           document.documentElement.classList.remove('dark')
+          document.documentElement.classList.add('light')
         }
       }
 
@@ -82,15 +75,13 @@ const preview: Preview = {
         if (themeMode === 'system') {
           mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
-          systemThemeListener = (e: MediaQueryListEvent) => {
+          systemThemeListener = () => {
             // Double-check we're still in system mode
+            // In system mode, CSS handles everything via prefers-color-scheme
+            // We just need to ensure classes stay removed
             if (context.globals.darkMode === 'system') {
               if (typeof document !== 'undefined') {
-                if (e.matches) {
-                  document.documentElement.classList.add('dark')
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }
+                document.documentElement.classList.remove('dark', 'light')
               }
             }
           }
