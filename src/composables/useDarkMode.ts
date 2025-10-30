@@ -28,13 +28,18 @@ export function useDarkMode() {
     themeMode.value = mode
   }
 
-  // Apply dark class to document element
-  const applyTheme = (dark: boolean) => {
+  // Apply theme class to document element (only when not in system mode)
+  const applyTheme = (mode: ThemeMode, dark: boolean) => {
     if (typeof document !== 'undefined') {
-      if (dark) {
+      if (mode === 'system') {
+        // Remove both classes to let CSS prefers-color-scheme handle it
+        document.documentElement.classList.remove('dark', 'light')
+      } else if (dark) {
+        document.documentElement.classList.remove('light')
         document.documentElement.classList.add('dark')
       } else {
         document.documentElement.classList.remove('dark')
+        document.documentElement.classList.add('light')
       }
     }
   }
@@ -75,15 +80,7 @@ export function useDarkMode() {
     (newMode) => {
       isDark.value = calculateIsDark(newMode)
       saveThemeMode(newMode)
-    },
-    { immediate: true },
-  )
-
-  // Watch isDark changes and apply theme
-  watch(
-    isDark,
-    (newValue) => {
-      applyTheme(newValue)
+      applyTheme(newMode, isDark.value)
     },
     { immediate: true },
   )
@@ -101,6 +98,7 @@ export function useDarkMode() {
         // Only update if currently in system mode
         if (themeMode.value === 'system') {
           isDark.value = e.matches
+          // No need to apply theme as CSS handles it in system mode
         }
       }
 
