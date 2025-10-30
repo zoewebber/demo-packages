@@ -34,7 +34,9 @@
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
+    - printenv
     - npm run test:unit:ci
+    - ""
     shell: BASH
     unit_tests_suite: unit
   - action: npm run test:e2e:ci
