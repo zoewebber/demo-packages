@@ -36,7 +36,7 @@ describe('storage utilities', () => {
       saveTodos(todos);
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
-        'wrong-storage-key', // BROKEN: expecting wrong key
+        'vue-todo-app',
         JSON.stringify(todos)
       );
     });

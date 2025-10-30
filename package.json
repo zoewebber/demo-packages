@@ -44,7 +44,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@buddy-works/unit-tests": "^0.15.0",
+    "@buddy-works/unit-tests": "rc",
     "@playwright/test": "^1.55.1",
     "@storybook/addon-links": "^9.1.10",
     "@storybook/addon-onboarding": "^9.1.10",
