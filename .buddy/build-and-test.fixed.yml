@@ -49,7 +49,7 @@
     - ""
     setup_commands:
     - npx playwright install --with-deps
-    - npm i -g bdy@1.12.8
+    - npm i -g 1.14.0
     shell: BASH
     run_next: IN_SOFT_PARALLEL
     vt_suite: application
