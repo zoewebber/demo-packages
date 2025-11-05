@@ -62,7 +62,7 @@
     - npm run build-storybook
     - cd storybook-static && bdy visual storybook
     setup_commands:
-    - npm i -g bdy@1.12.8
+    - npm i -g bdy@1.14.0
     shell: BASH
     vt_suite: storybook
   - action: Publish storybook package
