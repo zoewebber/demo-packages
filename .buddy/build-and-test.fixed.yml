@@ -10,6 +10,7 @@
   actions:
   - action: npm install
     type: BUILD
+    disabled: true
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
@@ -67,8 +68,8 @@
     vt_suite: storybook
   - action: Publish app package
     type: PUBLISH_PACKAGE_VERSION
-    input_type: BUILD_ARTIFACTS
-    local_path: /dist
     package: app
     versions:
     - $BUDDY_RUN_REF_NAME
+    input_type: BUILD_ARTIFACTS
+    local_path: /dist
