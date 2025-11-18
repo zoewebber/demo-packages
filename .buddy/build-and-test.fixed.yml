@@ -30,6 +30,7 @@
     setup_commands:
     - npx playwright install --with-deps
     shell: BASH
+    run_next: IN_SOFT_PARALLEL
   - action: npm run test:unit:ci
     type: BUILD
     docker_image_name: library/node
