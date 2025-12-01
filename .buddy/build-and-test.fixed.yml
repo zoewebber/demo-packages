@@ -2,15 +2,14 @@
   name: build and test
   refs:
   - '*'
+  fail_on_prepare_env_warning: true
+  concurrent_pipeline_runs: true
   events:
   - type: WEBHOOK
   - type: PUSH
-  fail_on_prepare_env_warning: true
-  concurrent_pipeline_runs: true
   actions:
   - action: npm install
     type: BUILD
-    disabled: true
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
