@@ -57,7 +57,7 @@
     vt_suite: application
     unit_tests_suite: e2e
   - action: test storybook
-    type: BUILD
+    type: STORYBOOK
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
