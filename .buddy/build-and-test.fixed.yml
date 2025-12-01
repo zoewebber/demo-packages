@@ -8,6 +8,16 @@
   - type: WEBHOOK
   - type: PUSH
   actions:
+  - action: "Create new sandbox: teest"
+    type: SANDBOX_CREATE
+    from: SCRATCH
+    spec:
+      sandbox: teest
+      name: teest
+      os: ubuntu:24.04
+      app_type: CMD
+      endpoints:
+      - www: 80
   - action: npm install
     type: BUILD
     docker_image_name: library/node
