@@ -72,5 +72,6 @@
     package: app
     versions:
     - $BUDDY_RUN_REF_NAME
+    disabled: true
     input_type: BUILD_ARTIFACTS
     local_path: /dist
