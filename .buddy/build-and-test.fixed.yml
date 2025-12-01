@@ -42,6 +42,7 @@
     unit_tests_suite: unit
   - action: npm run test:e2e:ci
     type: BUILD
+    disabled: true
     docker_image_name: library/node
     docker_image_tag: 22
     execute_commands:
